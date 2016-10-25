@@ -21,6 +21,6 @@ RUN apt-get install -y git gnupg flex bison gperf build-essential\
     zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 \
     libncurses5-dev x11proto-core-dev libx11-dev lib32z-dev ccache \
     libgl1-mesa-dev libxml2-utils xsltproc unzip python \
-    vim subversion dos2unix bc expect && \
+    vim subversion dos2unix bc expect lzop && \
     apt-get install -y software-properties-common && add-apt-repository -y ppa:openjdk-r/ppa && apt-get update && apt-get install -y --allow-unauthenticated openjdk-7-jdk
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
