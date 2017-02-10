@@ -1,0 +1,4 @@
+start_private.sh
+start-user_private.sh
+# ~/.netrc for git simple auth
+netrc
