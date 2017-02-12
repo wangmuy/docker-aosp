@@ -23,7 +23,7 @@ RUN apt-get install -y git gnupg flex bison gperf build-essential sudo \
     libgl1-mesa-dev libxml2-utils xsltproc unzip python \
     vim subversion dos2unix bc expect lzop && \
     apt-get install -y software-properties-common && \
-    add-apt-repository -y ppa:openjdk-r/ppa && apt-get update && apt-get install -y --allow-unauthenticated openjdk-7-jdk && \
+    add-apt-repository -y ppa:openjdk-r/ppa && apt-get update && apt-get install -y --allow-unauthenticated openjdk-7-jdk openjdk-8-jdk && \
     add-apt-repository -y ppa:webupd8team/java && apt-get update && \
     echo oracle-java6-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && apt-get install -y oracle-java6-installer
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
