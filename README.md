@@ -18,7 +18,7 @@ Or use this as a sdk runner:
 
 ```
 docker run --rm -it -v android-sdk:/android-sdk -e ANDROID_HOME=/android-sdk \
--v gradle:/gradle -e GRADLE_HOME=/android-sdk \
+-v gradle:/gradle -e GRADLE_HOME=/gradle \
 -e JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \
 -v workspace:/workspace -e WORKDIR_USER=/workspace \
 wangmuy/aosp /scripts/start.sh ./gradlew build
