@@ -23,9 +23,8 @@ RUN apt-get install -y git gnupg flex bison gperf build-essential sudo \
     libgl1-mesa-dev libxml2-utils xsltproc unzip python \
     vim subversion dos2unix bc expect lzop && \
     apt-get install -y software-properties-common && \
-    add-apt-repository -y ppa:openjdk-r/ppa && apt-get update && apt-get install -y --allow-unauthenticated openjdk-7-jdk openjdk-8-jdk && \
-    add-apt-repository -y ppa:webupd8team/java && apt-get update && \
-    echo oracle-java6-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && apt-get install -y oracle-java6-installer
+    add-apt-repository -y ppa:openjdk-r/ppa && apt-get update && apt-get install -y --allow-unauthenticated openjdk-7-jdk openjdk-8-jdk
+# RUN add-apt-repository -y ppa:webupd8team/java && apt-get update && echo oracle-java6-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && apt-get install -y oracle-java6-installer
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # All builds will be done by user aosp
@@ -39,6 +38,6 @@ ENV CCACHE_DIR /tmp/ccache
 # chinese env
 ENV LANG C.UTF-8
 
-COPY docker_entrypoint.sh /root/docker_entrypoint.sh
-ENTRYPOINT ["/root/docker_entrypoint.sh"]
+COPY . /scripts
+ENTRYPOINT ["/scripts/docker_entrypoint.sh"]
 
