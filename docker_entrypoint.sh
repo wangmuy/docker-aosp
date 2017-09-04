@@ -23,11 +23,11 @@ useradd -u $USER_ID --create-home -r -g aosp aosp
 echo "$msg - done"
 
 msg="docker_entrypoint: Copying .gitconfig and .ssh/config to new user home" && echo $msg
-cp /root/.gitconfig /home/aosp/.gitconfig && \
-chown aosp:aosp /home/aosp/.gitconfig && \
-mkdir -p /home/aosp/.ssh && \
-cp /root/.ssh/config /home/aosp/.ssh/config && \
-chown aosp:aosp -R /home/aosp/.ssh &&
+[ -f /root/.gitconfig ] && cp /root/.gitconfig /home/aosp/.gitconfig && \
+chown aosp:aosp /home/aosp/.gitconfig
+mkdir -p /home/aosp/.ssh
+[ -f /root/.ssh/config ] && cp /root/.ssh/config /home/aosp/.ssh/config
+chown aosp:aosp -R /home/aosp/.ssh && \
 echo "$msg - done"
 
 msg="docker_entrypoint: Creating /tmp/ccache and /aosp directory" && echo $msg
@@ -38,12 +38,15 @@ if [ ! -d /tmp/ccache ]; then
 fi
 
 echo "aosp ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-echo ""
+echo "entrypoint script done!"
 
-# Default to 'bash' if no arguments are provided
-args="$@"
-if [ -z "$args" ]; then
-  args="bash"
+if [ -z "$DOCKER_ENVSETUP" ]; then
+  echo "entrypoint going exec..."
+  # Default to 'bash' if no arguments are provided
+  args="$@"
+  if [ -z "$args" ]; then
+    args="bash"
+  fi
+  exec $args
 fi
 
-exec $args
